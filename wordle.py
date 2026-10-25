@@ -2,10 +2,17 @@
 
 import random
 
-f = open("words.txt")
+f = open("validWords.txt")
 validWords = f.readlines()
 validWords = [x.strip() for x in validWords]
+
+f2 = open("possibleWords.txt")
+possibleWords = f2.readlines()
+possibleWords = [x.strip() for x in possibleWords] 
+
 f.close()
+
+won = False
 
 def strToDict(sting, diction):
   for letter in sting:
@@ -30,7 +37,7 @@ def colorChange(string, index, num):
     newString += color
   return newString
 
-word = validWords[random.randint(0, len(validWords))]
+word = possibleWords[random.randint(0, len(possibleWords))]
 wLetters = {}
 strToDict(word, wLetters)
 
@@ -75,4 +82,8 @@ while (guess != word and guessNum <= 6):
     guessNum += 1
     
     if correct == "🟩 🟩 🟩 🟩 🟩 ":
+      won = True
       print("You win!!")
+
+if not won:
+  print("Nice try. The word was " + word)
